@@ -144,20 +144,56 @@ require('lazy').setup({
       },
     },
   },
-
-  { -- Useful plugin to show you pending keybinds.
+  --[[
+  {
+    -- Old which-key Config
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
-      -- Document existing key chains
+      -- Document existing key chains with the new spec
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>c_', hidden = true },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d_', hidden = true },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>s_', hidden = true },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w_', hidden = true },
+      }
+    end,
+  },
+]]
+  {
+    -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    config = function()
+      local wk = require 'which-key'
+
+      wk.setup() -- Initialize which-key
+
+      -- Register keybindings with the updated API
+      wk.setup {
+        plugins = {
+          spelling = { enabled = true }, -- Enable suggestions for spelling
+        },
+      }
+
+      wk.setup {
+        mode = 'n', -- Normal mode
+        prefix = '<leader>',
+        mappings = {
+          c = { name = '[C]ode' }, -- Group under [C]ode
+          d = { name = '[D]ocument' }, -- Group under [D]ocument
+          r = { name = '[R]ename' }, -- Group under [R]ename
+          s = { name = '[S]earch' }, -- Group under [S]earch
+          w = { name = '[W]orkspace' }, -- Group under [W]orkspace
+        },
       }
     end,
   },
