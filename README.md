@@ -1,11 +1,18 @@
 # MY NEOVIM CONFIG
 this is my neovim config, using Lazy and Mason
 
-## Cloning into dotfiles
+## Cloning my dotfiles
 ```bash
-$ git clone https://github.com/kriswind/dotfiles-neovim.git ~/.config/nvim 
+git clone https://github.com/kriswind/dotfiles-neovim.git ~/.config/nvim 
 ```
 
-## Additional Requirements:
+## Requirements:
+neovim
+
+### Optionally
 git, make, unzip, gcc, ripgrep
-Optionally a Nerd Font (vim.g.have_nerd_font = true)
+any Nerd Font (vim.g.have_nerd_font = true)
+### Install easily on arch using:
+```bash
+sudo pacman -Syu nvim git make unzip gcc
+```
